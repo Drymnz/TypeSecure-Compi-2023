@@ -8,22 +8,22 @@ package com.cunoc.Logic.Parser;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DECIMAL = 10;
-  public static final int LEFT = 12;
+  public static final int DECIMAL = 11;
+  public static final int DOUBLEPUNTO = 14;
   public static final int SUMAR = 3;
-  public static final int ENTERO = 9;
+  public static final int ENTERO = 10;
+  public static final int t_const = 13;
   public static final int EOF = 0;
   public static final int MULTIPLICAR = 6;
-  public static final int RIGHT = 13;
-  public static final int PUSH = 14;
   public static final int RESTAR = 4;
   public static final int DIVIDIR = 5;
+  public static final int IGUAL = 7;
   public static final int error = 1;
-  public static final int DOWN = 15;
-  public static final int PARENTESIS_C = 8;
+  public static final int PARENTESIS_C = 9;
   public static final int PUNTOYCOMA = 2;
-  public static final int PARENTESIS_A = 7;
-  public static final int UP = 11;
+  public static final int NOMBRE = 12;
+  public static final int PARENTESIS_A = 8;
+  public static final int t_number = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -32,15 +32,15 @@ public class sym {
   "RESTAR",
   "DIVIDIR",
   "MULTIPLICAR",
+  "IGUAL",
   "PARENTESIS_A",
   "PARENTESIS_C",
   "ENTERO",
   "DECIMAL",
-  "UP",
-  "LEFT",
-  "RIGHT",
-  "PUSH",
-  "DOWN"
+  "NOMBRE",
+  "t_const",
+  "DOUBLEPUNTO",
+  "t_number"
   };
 }
 

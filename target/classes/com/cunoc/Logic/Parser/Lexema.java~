@@ -72,10 +72,12 @@ public class Lexema implements java_cup.runtime.Scanner {
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
     "\11\0\1\1\1\2\3\3\22\0\1\1\7\0\1\4"+
     "\1\5\1\6\1\7\1\0\1\10\1\11\1\12\12\13"+
-    "\1\0\1\14\64\0\1\15\4\0\1\16\6\0\1\1"+
-    "\10\0\1\3\32\0\1\1\u01df\0\1\1\177\0\13\1"+
-    "\35\0\2\3\5\0\1\1\57\0\1\1\240\0\1\1"+
-    "\377\0\u0100\17";
+    "\1\14\1\15\1\0\1\16\3\0\32\17\4\0\1\17"+
+    "\1\0\1\17\1\20\1\21\1\17\1\22\7\17\1\23"+
+    "\1\24\1\25\2\17\1\26\1\27\1\30\1\31\5\17"+
+    "\1\0\1\1\10\0\1\3\32\0\1\1\u01df\0\1\1"+
+    "\177\0\13\1\35\0\2\3\5\0\1\1\57\0\1\1"+
+    "\240\0\1\1\377\0\u0100\32";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1536];
@@ -103,11 +105,12 @@ public class Lexema implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
-    "\1\10\1\11\1\12\1\1\3\10\1\0\1\13\1\10"+
-    "\1\0\1\10\1\14\1\0\1\15";
+    "\1\10\1\11\1\12\1\13\1\14\3\15\3\10\1\0"+
+    "\2\15\1\10\1\0\1\10\1\16\2\15\1\0\2\15"+
+    "\1\17\1\20\1\15\1\21";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[23];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -132,12 +135,14 @@ public class Lexema implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\20\0\40\0\20\0\20\0\20\0\20\0\20"+
-    "\0\60\0\100\0\20\0\120\0\140\0\20\0\160\0\200"+
-    "\0\20\0\220\0\220\0\240\0\200\0\260\0\20";
+    "\0\0\0\33\0\66\0\33\0\33\0\33\0\33\0\33"+
+    "\0\121\0\154\0\33\0\33\0\33\0\207\0\242\0\275"+
+    "\0\330\0\33\0\363\0\u010e\0\u0129\0\u0144\0\u015f\0\u015f"+
+    "\0\u017a\0\u010e\0\u0195\0\u01b0\0\u01cb\0\u01e6\0\u0201\0\33"+
+    "\0\207\0\u021c\0\207";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[23];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -161,16 +166,24 @@ public class Lexema implements java_cup.runtime.Scanner {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\3\3\1\4\1\5\1\6\1\7\1\10\1\2"+
-    "\1\11\1\12\1\13\1\2\1\14\22\0\3\3\14\0"+
-    "\2\15\1\16\1\0\2\15\1\17\10\15\12\0\1\20"+
-    "\1\0\1\12\21\0\1\21\2\0\2\15\1\16\1\0"+
-    "\13\15\1\0\2\17\1\22\1\23\2\17\1\24\10\17"+
-    "\1\23\13\0\1\25\4\0\6\23\1\26\11\23\2\17"+
-    "\1\22\1\23\2\17\1\24\3\17\1\15\4\17\7\23"+
-    "\1\26\3\23\1\27\5\23";
+    "\1\11\1\12\1\13\1\14\1\15\2\16\1\17\2\16"+
+    "\1\20\5\16\35\0\3\3\27\0\2\21\1\22\1\0"+
+    "\2\21\1\23\23\21\12\0\1\24\1\0\1\12\3\0"+
+    "\13\16\14\0\1\16\3\0\13\16\14\0\1\16\3\0"+
+    "\6\16\1\25\4\16\14\0\1\16\3\0\12\16\1\26"+
+    "\1\0\2\21\1\22\1\0\26\21\1\0\2\23\1\27"+
+    "\1\30\2\23\1\31\23\23\1\30\13\0\1\32\32\0"+
+    "\1\16\3\0\5\16\1\33\5\16\14\0\1\16\3\0"+
+    "\4\16\1\34\6\16\1\0\6\30\1\35\24\30\2\23"+
+    "\1\27\1\30\2\23\1\31\3\23\1\21\17\23\1\30"+
+    "\13\0\1\16\3\0\10\16\1\36\2\16\14\0\1\16"+
+    "\3\0\1\16\1\37\11\16\1\0\6\30\1\35\3\30"+
+    "\1\40\20\30\13\0\1\16\3\0\11\16\1\41\1\16"+
+    "\14\0\1\16\3\0\3\16\1\42\7\16\14\0\1\16"+
+    "\3\0\7\16\1\43\3\16\1\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[192];
+    int [] result = new int[567];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -213,11 +226,12 @@ public class Lexema implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\1\1\5\11\2\1\1\11\2\1\1\11"+
-    "\1\1\1\0\1\11\1\1\1\0\2\1\1\0\1\11";
+    "\1\0\1\11\1\1\5\11\2\1\3\11\4\1\1\11"+
+    "\1\1\1\0\3\1\1\0\4\1\1\0\2\1\1\11"+
+    "\3\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[23];
+    int [] result = new int[35];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -710,67 +724,87 @@ public class Lexema implements java_cup.runtime.Scanner {
             { print(); System.out.println("¡¡¡¡¡¡NO PERTENECE AL ALFABETO -> ERROR LEXICO!!!!!!!!!"+(yytext()));
             }
             // fall through
-          case 14: break;
+          case 18: break;
           case 2:
             { /*nada*/
             }
             // fall through
-          case 15: break;
+          case 19: break;
           case 3:
             { print(); return new Symbol(sym.PARENTESIS_A,yyline,yycolumn);
             }
             // fall through
-          case 16: break;
+          case 20: break;
           case 4:
             { print(); return new Symbol(sym.PARENTESIS_C,yyline,yycolumn);
             }
             // fall through
-          case 17: break;
+          case 21: break;
           case 5:
             { print(); return new Symbol(sym.MULTIPLICAR,yyline,yycolumn);
             }
             // fall through
-          case 18: break;
+          case 22: break;
           case 6:
             { print(); return new Symbol(sym.SUMAR,yyline,yycolumn);
             }
             // fall through
-          case 19: break;
+          case 23: break;
           case 7:
             { print(); return new Symbol(sym.RESTAR,yyline,yycolumn);
             }
             // fall through
-          case 20: break;
+          case 24: break;
           case 8:
             { //System.out.println("Comentarios de linea ->"+this.yytext());
             }
             // fall through
-          case 21: break;
+          case 25: break;
           case 9:
             { print(); return new Symbol(sym.ENTERO,yyline,yycolumn, (yytext()));
             }
             // fall through
-          case 22: break;
+          case 26: break;
           case 10:
+            { print(); return new Symbol(sym.DOUBLEPUNTO,yyline,yycolumn);
+            }
+            // fall through
+          case 27: break;
+          case 11:
             { print(); return new Symbol(sym.PUNTOYCOMA,yyline,yycolumn);
             }
             // fall through
-          case 23: break;
-          case 11:
-            { print(); return new Symbol(sym.UP,yyline,yycolumn);
+          case 28: break;
+          case 12:
+            { print(); return new Symbol(sym.IGUAL,yyline,yycolumn);
             }
             // fall through
-          case 24: break;
-          case 12:
+          case 29: break;
+          case 13:
+            { print(); return new Symbol(sym.NOMBRE,yyline,yycolumn, (yytext()));
+            }
+            // fall through
+          case 30: break;
+          case 14:
             { print(); return new Symbol(sym.DECIMAL,yyline,yycolumn, (yytext()));
             }
             // fall through
-          case 25: break;
-          case 13:
+          case 31: break;
+          case 15:
             { //System.out.println("Comentarios multilinea / otro comentario multilinea ->"+this.yytext() +" <-- Termino");
             }
             // fall through
-          case 26: break;
+          case 32: break;
+          case 16:
+            { print(); return new Symbol(sym.t_const,yyline,yycolumn);
+            }
+            // fall through
+          case 33: break;
+          case 17:
+            { print(); return new Symbol(sym.t_number,yyline,yycolumn);
+            }
+            // fall through
+          case 34: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -25,6 +25,7 @@ import java.util.List;
 %}
 ENTERO =[0-9]+
 DECIMAL = {ENTERO}[.]{ENTERO}
+NOMBRE = [a-zA-Z0-9_]+
 espacio =[\r|\t|\f|\n|\s| ]+
 no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 %%
@@ -44,6 +45,9 @@ no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 ";"                 {
                    print(); return new Symbol(sym.PUNTOYCOMA,yyline,yycolumn);
                     }
+":"                 {
+                   print(); return new Symbol(sym.DOUBLEPUNTO,yyline,yycolumn);
+                    }
 /*SIMBOLOS ARIMETICOS*/
 "+"                 {
                    print(); return new Symbol(sym.SUMAR,yyline,yycolumn);
@@ -57,6 +61,9 @@ no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 "*"                 {
                    print(); return new Symbol(sym.MULTIPLICAR,yyline,yycolumn);
                     }
+"="                 {
+                   print(); return new Symbol(sym.IGUAL,yyline,yycolumn);
+                    }
 /*SIMBOLOS DE AGRUPACION*/
 "("                 {
                    print(); return new Symbol(sym.PARENTESIS_A,yyline,yycolumn);
@@ -64,17 +71,23 @@ no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 ")"                 {
                    print(); return new Symbol(sym.PARENTESIS_C,yyline,yycolumn);
                     }
-/*PALABRAS RESERVADAS*/
-"up"                {
-                   print(); return new Symbol(sym.UP,yyline,yycolumn);
+/*Tipo de variable en el habito*/
+"const"             {
+                    print(); return new Symbol(sym.t_const,yyline,yycolumn);
                     }
-
+/*Tipo para la variable*/
+"number"             {
+                    print(); return new Symbol(sym.t_number,yyline,yycolumn);
+                    }
 /*Token*/
 {ENTERO}            {
                    print(); return new Symbol(sym.ENTERO,yyline,yycolumn, (yytext()));
                     }
 {DECIMAL}           {
                    print(); return new Symbol(sym.DECIMAL,yyline,yycolumn, (yytext()));
+                    }
+{NOMBRE}           {
+                   print(); return new Symbol(sym.NOMBRE,yyline,yycolumn, (yytext()));
                     }
 /*ERROR LEXICO*/
 .                   {

@@ -7,6 +7,10 @@ package com.cunoc.Logic.Parser;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import com.cunoc.Logic.Parser.HijosToke.Declaracion;
+import com.cunoc.Logic.Parser.Listados.TipoDato;
+import com.cunoc.Logic.Parser.Listados.TipoToke;
+import com.cunoc.Logic.Parser.Listados.TipoVariable;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -32,11 +36,12 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\015\000\002\002\004\000\002\004\002\000\002\003" +
-    "\003\000\002\003\003\000\002\002\005\000\002\002\005" +
-    "\000\002\002\005\000\002\002\005\000\002\013\002\000" +
-    "\002\002\006\000\002\002\003\000\002\002\003\000\002" +
-    "\002\004" });
+    "\000\020\000\002\002\004\000\002\004\003\000\002\004" +
+    "\002\000\002\005\004\000\002\005\003\000\002\006\011" +
+    "\000\002\003\003\000\002\003\003\000\002\002\005\000" +
+    "\002\002\005\000\002\002\005\000\002\002\005\000\002" +
+    "\002\005\000\002\002\003\000\002\002\003\000\002\002" +
+    "\004" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -44,8 +49,32 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\003\000\004\002\000\001\002\000\004\002\005\001" +
-    "\002\000\004\002\001\001\002" });
+    "\000\036\000\006\002\uffff\017\006\001\002\000\006\002" +
+    "\000\017\006\001\002\000\006\002\ufffd\017\ufffd\001\002" +
+    "\000\004\016\011\001\002\000\004\002\010\001\002\000" +
+    "\004\002\001\001\002\000\004\020\012\001\002\000\004" +
+    "\021\013\001\002\000\004\011\014\001\002\000\014\003" +
+    "\015\006\017\012\020\014\023\015\022\001\002\000\004" +
+    "\004\ufffa\001\002\000\004\004\037\001\002\000\004\014" +
+    "\036\001\002\000\012\006\017\012\020\014\023\015\022" +
+    "\001\002\000\014\004\ufffb\005\026\006\027\007\024\010" +
+    "\025\001\002\000\016\004\ufff3\005\ufff3\006\ufff3\007\ufff3" +
+    "\010\ufff3\013\ufff3\001\002\000\016\004\ufff4\005\ufff4\006" +
+    "\ufff4\007\ufff4\010\ufff4\013\ufff4\001\002\000\012\006\017" +
+    "\012\020\014\023\015\022\001\002\000\012\006\017\012" +
+    "\020\014\023\015\022\001\002\000\012\006\017\012\020" +
+    "\014\023\015\022\001\002\000\012\006\017\012\020\014" +
+    "\023\015\022\001\002\000\016\004\ufff8\005\ufff8\006\ufff8" +
+    "\007\024\010\025\013\ufff8\001\002\000\016\004\ufff9\005" +
+    "\ufff9\006\ufff9\007\024\010\025\013\ufff9\001\002\000\016" +
+    "\004\ufff6\005\ufff6\006\ufff6\007\ufff6\010\ufff6\013\ufff6\001" +
+    "\002\000\016\004\ufff7\005\ufff7\006\ufff7\007\ufff7\010\ufff7" +
+    "\013\ufff7\001\002\000\014\005\026\006\027\007\024\010" +
+    "\025\013\035\001\002\000\016\004\ufff5\005\ufff5\006\ufff5" +
+    "\007\ufff5\010\ufff5\013\ufff5\001\002\000\016\004\ufff2\005" +
+    "\ufff2\006\ufff2\007\ufff2\010\ufff2\013\ufff2\001\002\000\006" +
+    "\002\ufffc\017\ufffc\001\002\000\006\002\ufffe\017\ufffe\001" +
+    "\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -53,8 +82,18 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\003\000\004\004\003\001\001\000\002\001\001\000" +
-    "\002\001\001" });
+    "\000\036\000\010\004\006\005\003\006\004\001\001\000" +
+    "\004\006\037\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\006\002\020\003\015" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\002\033\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\002\032\001\001\000" +
+    "\004\002\031\001\001\000\004\002\030\001\001\000\004" +
+    "\002\027\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -97,41 +136,27 @@ public class parser extends java_cup.runtime.lr_parser {
 	public parser(Lexema lexer) {
         super(lexer);
     }
-    
     private int contador;
     private int errorCounter;
-    private ArrayList<ArrayList<String>> listMath = new ArrayList<>();
+    private ArrayList<Toke> lista = new ArrayList<>();
 
-    public ArrayList<ArrayList<String>> getListMath(){
-        return this.listMath;
+    public ArrayList<Toke> getListMath(){
+        return this.lista;
     }
     
-    private void addListMath(String type,String a,String b){
-        if (listMath.isEmpty()) {
-            ArrayList<String> rowTi = new ArrayList<>();
-            rowTi.add("--Reporte de operadores matemáticos--");
-            listMath.add(rowTi);
-            ArrayList<String> row = new ArrayList<>();
-            row.add("Operador");
-            row.add("Línea");
-            row.add("Columna");
-            listMath.add(row);
-        }
-    ArrayList<String> row = new ArrayList<>();
-    row.add(type);
-    row.add((cur_token.left+1)+"");
-    row.add((cur_token.right+1)+"");
-    listMath.add(row);
-}
     public void syntax_error(Symbol cur_token) {
         errorCounter++;
-        System.out.println("\n"+errorCounter+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
+        System.out.println("\n Error "+errorCounter+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
     }
 
     public void unrecovered_syntax_error(Symbol cur_token) {
         if (cur_token.sym == sym.EOF) {
             System.out.println("public void unrecoveredsyntax_error!!!!!!!!!!!!!!");
         }
+    }
+
+    public void printlnInter(String a){
+         System.out.println(a);
     }
     /**
      * ***END CODE*******
@@ -177,7 +202,20 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // inicio ::= 
+          case 1: // inicio ::= acciones 
+            {
+              Object RESULT =null;
+				
+    for (Toke iterable_element : lista) {
+      System.out.println(iterable_element.toString());
+    }
+    
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("inicio",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // inicio ::= 
             {
               Object RESULT =null;
 
@@ -186,177 +224,163 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // j ::= o 
+          case 3: // acciones ::= acciones sematico 
             {
-              String RESULT =null;
+              Object RESULT =null;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("acciones",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 4: // acciones ::= sematico 
+            {
+              Object RESULT =null;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("acciones",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // sematico ::= t_const NOMBRE DOUBLEPUNTO t_number IGUAL j PUNTOYCOMA 
+            {
+              Object RESULT =null;
+		int nameleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int nameright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		String name = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		int valorleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int valorright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Toke valor = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		lista.add(new Declaracion((cur_token.right+1),(cur_token.left+1), TipoToke.DECLARACION.getText(),TipoVariable.CONST , TipoDato.NUMBER, name, valor));
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("sematico",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // j ::= o 
+            {
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-    RESULT = a;
-    double numeroUno= Double.valueOf(a);
-    contador = (int) numeroUno;
-           
               CUP$parser$result = parser.getSymbolFactory().newSymbol("j",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // j ::= error 
+          case 7: // j ::= error 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		
-           
               CUP$parser$result = parser.getSymbolFactory().newSymbol("j",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // o ::= o SUMAR o 
+          case 8: // o ::= o SUMAR o 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		Toke b = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno+numeroDos;
-                    addListMath("Suma",a,b);
-                    RESULT = String.valueOf(resultado);
-                    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // o ::= o RESTAR o 
+          case 9: // o ::= o RESTAR o 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		Toke b = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-                double numeroUno= Double.valueOf(a);
-                double numeroDos= Double.valueOf(b);
-                double resultado = numeroUno-numeroDos;
-                addListMath("Resta",a,b);
-                RESULT = String.valueOf(resultado);
-                    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // o ::= o DIVIDIR o 
+          case 10: // o ::= o DIVIDIR o 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		Toke b = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno/numeroDos;
-                    addListMath("Division",a,b);
-                    RESULT = String.valueOf(resultado);
-                    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // o ::= o MULTIPLICAR o 
+          case 11: // o ::= o MULTIPLICAR o 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno*numeroDos;
-                    addListMath("Multiplicacion",a,b);
-                    RESULT = String.valueOf(resultado);
-                    
+		Toke b = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // NT$0 ::= 
+          case 12: // o ::= PARENTESIS_A o PARENTESIS_C 
             {
-              String RESULT =null;
+              Toke RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
+		Toke a = (Toke)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // o ::= ENTERO 
+            {
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
- RESULT = a; 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("NT$0",9, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
 
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // o ::= PARENTESIS_A o NT$0 PARENTESIS_C 
-            {
-              String RESULT =null;
-              // propagate RESULT from NT$0
-                RESULT = (String) ((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
-            }
-          return CUP$parser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // o ::= ENTERO 
-            {
-              String RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = a; 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // o ::= DECIMAL 
+          case 14: // o ::= DECIMAL 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = a; 
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // o ::= RESTAR ENTERO 
+          case 15: // o ::= RESTAR ENTERO 
             {
-              String RESULT =null;
+              Toke RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		
-                    double numeroUno= Double.valueOf(a);
-                    numeroUno = numeroUno*-1;
-                    RESULT = String.valueOf(numeroUno);
- 
+
               CUP$parser$result = parser.getSymbolFactory().newSymbol("o",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

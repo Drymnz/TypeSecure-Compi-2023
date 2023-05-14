@@ -4,41 +4,27 @@ package com.cunoc.Logic.Parser;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import com.cunoc.Logic.Parser.HijosToke.Declaracion;
+import com.cunoc.Logic.Parser.Listados.TipoDato;
+import com.cunoc.Logic.Parser.Listados.TipoToke;
+import com.cunoc.Logic.Parser.Listados.TipoVariable;
 
     parser code {:
 
 	public parser(Lexema lexer) {
         super(lexer);
     }
-    
     private int contador;
     private int errorCounter;
-    private ArrayList<ArrayList<String>> listMath = new ArrayList<>();
+    private ArrayList<Toke> lista = new ArrayList<>();
 
-    public ArrayList<ArrayList<String>> getListMath(){
-        return this.listMath;
+    public ArrayList<Toke> getListMath(){
+        return this.lista;
     }
     
-    private void addListMath(String type,String a,String b){
-        if (listMath.isEmpty()) {
-            ArrayList<String> rowTi = new ArrayList<>();
-            rowTi.add("--Reporte de operadores matemáticos--");
-            listMath.add(rowTi);
-            ArrayList<String> row = new ArrayList<>();
-            row.add("Operador");
-            row.add("Línea");
-            row.add("Columna");
-            listMath.add(row);
-        }
-    ArrayList<String> row = new ArrayList<>();
-    row.add(type);
-    row.add((cur_token.left+1)+"");
-    row.add((cur_token.right+1)+"");
-    listMath.add(row);
-}
     public void syntax_error(Symbol cur_token) {
         errorCounter++;
-        System.out.println("\n"+errorCounter+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
+        System.out.println("\n Error "+errorCounter+" - Clase<"+"> en simbolo<" + sym.terminalNames[cur_token.sym]+String.format(">posicion: <%d>, <%d>", (cur_token.left+1), (cur_token.right+1)));
     }
 
     public void unrecovered_syntax_error(Symbol cur_token) {
@@ -46,77 +32,67 @@ import java.util.ArrayList;
             System.out.println("public void unrecoveredsyntax_error!!!!!!!!!!!!!!");
         }
     }
+
+    public void printlnInter(String a){
+         System.out.println(a);
+    }
     /**
      * ***END CODE*******
      */
 :}
 /*************************************TERMINALES******************************************************/
 terminal PUNTOYCOMA; /*PUNTUACION*/
-terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR;/*SIMBOLOS DE OPERACION*/
+terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR,IGUAL;/*SIMBOLOS DE OPERACION*/
 terminal PARENTESIS_A,PARENTESIS_C;/*AGRUPACION*/
-terminal String ENTERO,DECIMAL; /*DATOS*/
-terminal UP,LEFT,RIGHT,PUSH,DOWN;/*Acciones*/
+terminal String ENTERO,DECIMAL,NOMBRE; /*DATOS*/
+
+terminal t_const,DOUBLEPUNTO;
+terminal t_number;
 /*************************************NO TERMINALES******************************************************/
-non terminal String o,j;/*para el uso de operaciones aritmeticas*/
-non terminal inicio,mover;
-non terminal tipo_mover,mover_jugador,mover_caja,contador_mover,agrupar;
+non terminal Toke o,j;/*para el uso de operaciones aritmeticas*/
+non terminal inicio,acciones,sematico;
 /*************************************PRECEDENCIA******************************************************/
 precedence left SUMAR, RESTAR;
 precedence left MULTIPLICAR, DIVIDIR;
 /*************************************GRAMATICA******************************************************/
 start with inicio;
 /******operaciones matematicas*****/
-inicio ::= 
+inicio ::= acciones 
+    {:		
+    for (Toke iterable_element : lista) {
+      System.out.println(iterable_element.toString());
+    }
+    :}
+    |
     ;
 
+acciones
+    ::= acciones sematico
+    |sematico
+    ;
+    
+sematico
+    ::= t_const NOMBRE:name  DOUBLEPUNTO t_number IGUAL j:valor PUNTOYCOMA 
+    {:lista.add(new Declaracion((cur_token.right+1),(cur_token.left+1), TipoToke.DECLARACION.getText(),TipoVariable.CONST , TipoDato.NUMBER, name, valor));:}
+    ;
 /******operaciones matematicas*****/
-j ::= o:a {:
-    RESULT = a;
-    double numeroUno= Double.valueOf(a);
-    contador = (int) numeroUno;
-           :} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
-           | error
-           {:
-           :}
-           ;
-o ::= o:a SUMAR o:b {:
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno+numeroDos;
-                    addListMath("Suma",a,b);
-                    RESULT = String.valueOf(resultado);
-                    :}
-
-|  o:a RESTAR o:b {:
-                double numeroUno= Double.valueOf(a);
-                double numeroDos= Double.valueOf(b);
-                double resultado = numeroUno-numeroDos;
-                addListMath("Resta",a,b);
-                RESULT = String.valueOf(resultado);
-                    :}
-
-|  o:a DIVIDIR o:b {:
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno/numeroDos;
-                    addListMath("Division",a,b);
-                    RESULT = String.valueOf(resultado);
-                    :}
-
-|  o:a MULTIPLICAR o:b {:
-                    double numeroUno= Double.valueOf(a);
-                    double numeroDos= Double.valueOf(b);
-                    double resultado = numeroUno*numeroDos;
-                    addListMath("Multiplicacion",a,b);
-                    RESULT = String.valueOf(resultado);
-                    :}
-
-| PARENTESIS_A o:a {: RESULT = a; :} PARENTESIS_C
-| ENTERO:a {: RESULT = a; :}
-| DECIMAL:a {: RESULT = a; :}
-| RESTAR ENTERO:a {:
-                    double numeroUno= Double.valueOf(a);
-                    numeroUno = numeroUno*-1;
-                    RESULT = String.valueOf(numeroUno);
- :}
+j ::= o:a 
+    {::} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
+    | error
+    {::}
+    ;
+o ::= o:a SUMAR o:b 
+{::}
+|  o:a RESTAR o:b 
+{::}
+|  o:a DIVIDIR o:b 
+{::}
+|  o:a MULTIPLICAR
+     o:b 
+| PARENTESIS_A
+     o:a 
+        PARENTESIS_C
+| ENTERO:a 
+| DECIMAL:a 
+| RESTAR ENTERO:a 
 ;
