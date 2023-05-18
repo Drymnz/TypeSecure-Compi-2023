@@ -3,9 +3,15 @@ E******************************************************/
 package com.cunoc.Logic.Parser;
 
 import java_cup.runtime.*;
+
+//////////////////////////
 import java.util.ArrayList;
+import com.cunoc.Logic.Parser.Ejecucion.Ejecutar;
 import com.cunoc.Logic.Parser.HijosToke.Declaracion;
+import com.cunoc.Logic.Parser.HijosToke.Operacion;
+import com.cunoc.Logic.Parser.HijosToke.Valor;
 import com.cunoc.Logic.Parser.Listados.TipoDato;
+import com.cunoc.Logic.Parser.Listados.TipoOperacion;
 import com.cunoc.Logic.Parser.Listados.TipoToke;
 import com.cunoc.Logic.Parser.Listados.TipoVariable;
 
@@ -44,13 +50,13 @@ import com.cunoc.Logic.Parser.Listados.TipoVariable;
 terminal PUNTOYCOMA; /*PUNTUACION*/
 terminal SUMAR,RESTAR,DIVIDIR,MULTIPLICAR,IGUAL;/*SIMBOLOS DE OPERACION*/
 terminal PARENTESIS_A,PARENTESIS_C;/*AGRUPACION*/
-terminal String ENTERO,DECIMAL,NOMBRE; /*DATOS*/
+terminal String BIGINT,NUMBER,NOMBRE; /*DATOS*/
 
-terminal t_const,DOUBLEPUNTO;
-terminal t_number;
+terminal t_const,t_let,DOUBLEPUNTO;
+terminal t_number,t_bigint;
 /*************************************NO TERMINALES******************************************************/
 non terminal Toke o,j;/*para el uso de operaciones aritmeticas*/
-non terminal inicio,acciones,sematico;
+non terminal inicio,acciones,sematico,declaracion;
 /*************************************PRECEDENCIA******************************************************/
 precedence left SUMAR, RESTAR;
 precedence left MULTIPLICAR, DIVIDIR;
@@ -58,10 +64,8 @@ precedence left MULTIPLICAR, DIVIDIR;
 start with inicio;
 /******operaciones matematicas*****/
 inicio ::= acciones 
-    {:		
-    for (Toke iterable_element : lista) {
-      System.out.println(iterable_element.toString());
-    }
+    {:	
+    (new Ejecutar(lista)).ejecutar();	
     :}
     |
     ;
@@ -70,29 +74,40 @@ acciones
     ::= acciones sematico
     |sematico
     ;
-    
+
 sematico
-    ::= t_const NOMBRE:name  DOUBLEPUNTO t_number IGUAL j:valor PUNTOYCOMA 
+    ::= 
+    declaracion
+    ;
+declaracion
+    ::=
+    t_const NOMBRE:name  DOUBLEPUNTO t_number IGUAL j:valor PUNTOYCOMA 
     {:lista.add(new Declaracion((cur_token.right+1),(cur_token.left+1), TipoToke.DECLARACION.getText(),TipoVariable.CONST , TipoDato.NUMBER, name, valor));:}
+    |t_let NOMBRE:name  DOUBLEPUNTO t_number IGUAL j:valor PUNTOYCOMA 
+    {:lista.add(new Declaracion((cur_token.right+1),(cur_token.left+1), TipoToke.DECLARACION.getText(),TipoVariable.LET , TipoDato.NUMBER, name, valor));:}
     ;
 /******operaciones matematicas*****/
 j ::= o:a 
-    {::} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
+    {:RESULT = a;:} /*A QUI ESTA EL TOTAL DE LA OPERACION*/
     | error
     {::}
     ;
 o ::= o:a SUMAR o:b 
-{::}
+{:RESULT = new Operacion((cur_token.right+1),(cur_token.left+1),TipoToke.OPERACION.getText(),b,a,TipoOperacion.SUMA);:}
 |  o:a RESTAR o:b 
-{::}
+{:RESULT = new Operacion((cur_token.right+1),(cur_token.left+1),TipoToke.OPERACION.getText(),b,a,TipoOperacion.RESTA);:}
 |  o:a DIVIDIR o:b 
-{::}
-|  o:a MULTIPLICAR
-     o:b 
-| PARENTESIS_A
-     o:a 
-        PARENTESIS_C
-| ENTERO:a 
-| DECIMAL:a 
-| RESTAR ENTERO:a 
+{:RESULT = new Operacion((cur_token.right+1),(cur_token.left+1),TipoToke.OPERACION.getText(),b,a,TipoOperacion.DIVIDIR);:}
+|  o:a MULTIPLICAR o:b 
+{:RESULT = new Operacion((cur_token.right+1),(cur_token.left+1),TipoToke.OPERACION.getText(),b,a,TipoOperacion.MULTIPLICAR);:}
+| PARENTESIS_A o:a PARENTESIS_C
+{:RESULT = a;:}
+| BIGINT:a 
+{:RESULT = new Valor((cur_token.right+1),(cur_token.left+1),a , TipoDato.BIGINT);:}
+| NUMBER:a 
+{:RESULT = new Valor((cur_token.right+1),(cur_token.left+1),a , TipoDato.NUMBER);:}
+| RESTAR o:a 
+{:RESULT = new Valor((cur_token.right+1),(cur_token.left+1), "-"+a , TipoDato.NUMBER);:}
+| NOMBRE:a 
+{:RESULT = new Valor((cur_token.right+1),(cur_token.left+1),a , TipoDato.VARIABLE);:}
 ;

@@ -8,10 +8,11 @@ package com.cunoc.Logic.Parser;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DECIMAL = 11;
-  public static final int DOUBLEPUNTO = 14;
+  public static final int DOUBLEPUNTO = 15;
   public static final int SUMAR = 3;
-  public static final int ENTERO = 10;
+  public static final int NUMBER = 11;
+  public static final int BIGINT = 10;
+  public static final int t_let = 14;
   public static final int t_const = 13;
   public static final int EOF = 0;
   public static final int MULTIPLICAR = 6;
@@ -23,7 +24,7 @@ public class sym {
   public static final int PUNTOYCOMA = 2;
   public static final int NOMBRE = 12;
   public static final int PARENTESIS_A = 8;
-  public static final int t_number = 15;
+  public static final int t_number = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -35,10 +36,11 @@ public class sym {
   "IGUAL",
   "PARENTESIS_A",
   "PARENTESIS_C",
-  "ENTERO",
-  "DECIMAL",
+  "BIGINT",
+  "NUMBER",
   "NOMBRE",
   "t_const",
+  "t_let",
   "DOUBLEPUNTO",
   "t_number"
   };

@@ -75,16 +75,22 @@ no_pertenece = ("~"|"`"|"&"|"!"|"@"|"#"|"$"|"%"|"_"|"\\"|"<"|">"|"\?"|"."|"^")+
 "const"             {
                     print(); return new Symbol(sym.t_const,yyline,yycolumn);
                     }
+"let"             {
+                    print(); return new Symbol(sym.t_let,yyline,yycolumn);
+                    }
 /*Tipo para la variable*/
 "number"             {
                     print(); return new Symbol(sym.t_number,yyline,yycolumn);
                     }
+"bigint"             {
+                    print(); return new Symbol(sym.t_bigint,yyline,yycolumn);
+                    }
 /*Token*/
 {ENTERO}            {
-                   print(); return new Symbol(sym.ENTERO,yyline,yycolumn, (yytext()));
+                   print(); return new Symbol(sym.BIGINT,yyline,yycolumn, (yytext()));
                     }
 {DECIMAL}           {
-                   print(); return new Symbol(sym.DECIMAL,yyline,yycolumn, (yytext()));
+                   print(); return new Symbol(sym.NUMBER,yyline,yycolumn, (yytext()));
                     }
 {NOMBRE}           {
                    print(); return new Symbol(sym.NOMBRE,yyline,yycolumn, (yytext()));

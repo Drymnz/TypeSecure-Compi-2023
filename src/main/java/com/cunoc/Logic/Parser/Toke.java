@@ -1,13 +1,14 @@
 package com.cunoc.Logic.Parser;
 
 public class Toke {
-    private final int fila;
-    private final int columna;
-    private final String lexema;
+    
+    protected final int fila;
+    protected final int columna;
+    protected final String lexema;
 
     protected Toke(int fila, int columna, String lexema) {
-        this.fila = fila;
-        this.columna = columna;
+        this.fila = columna;
+        this.columna = fila;
         this.lexema = lexema;
     }
 
@@ -23,4 +24,8 @@ public class Toke {
         return lexema;
     }
     
+    @Override
+    public String toString() {
+        return " Fila: " + this.fila + " Columna: " + this.columna +" Lexema: " + this.lexema;
+    }
 }

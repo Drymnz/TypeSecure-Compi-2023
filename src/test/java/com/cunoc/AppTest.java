@@ -54,5 +54,4 @@ public class AppTest
         assertTrue(lexicoParser(primerArchivoPruevas()) );
     }
 
-    
 }
